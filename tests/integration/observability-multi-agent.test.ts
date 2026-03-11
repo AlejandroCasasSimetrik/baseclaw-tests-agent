@@ -36,7 +36,16 @@ describe(
         function getLastAIContent(result: any): string {
             const aiMsgs = getAIMessages(result);
             const last = aiMsgs[aiMsgs.length - 1];
-            return last ? String(last.content) : "";
+            if (!last) return "";
+            const content = last.content;
+            // Handle Anthropic's array-of-blocks format: [{type: "text", text: "..."}]
+            if (Array.isArray(content)) {
+                return content
+                    .filter((block: any) => block.type === "text" || typeof block === "string")
+                    .map((block: any) => (typeof block === "string" ? block : block.text ?? ""))
+                    .join("");
+            }
+            return String(content);
         }
 
         // ── Ideation Agent full round-trip ─────────────────────
