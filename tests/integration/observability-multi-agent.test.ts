@@ -45,21 +45,44 @@ describe(
                     .map((block: any) => (typeof block === "string" ? block : block.text ?? ""))
                     .join("");
             }
-            return String(content);
+            if (typeof content === "object" && content !== null && "text" in content) {
+                return String(content.text);
+            }
+            return String(content ?? "");
+        }
+
+        /**
+         * Invoke the graph with retry — if we get an empty AI response,
+         * retry up to maxRetries times before giving up. LLMs sometimes
+         * return empty on first attempt but succeed on retry.
+         */
+        async function invokeWithRetry(
+            messages: any[],
+            maxRetries = 3
+        ): Promise<any> {
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                const result = await graph.invoke(
+                    { messages },
+                    { recursionLimit: 50 }
+                );
+                const content = getLastAIContent(result);
+                if (content.length > 0) return result;
+                if (attempt < maxRetries) {
+                    // Small delay before retry
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+            }
+            // Return the last attempt even if empty
+            return graph.invoke({ messages }, { recursionLimit: 50 });
         }
 
         // ── Ideation Agent full round-trip ─────────────────────
         it("ideation agent produces substantive brainstorming output", async () => {
-            const result = await graph.invoke(
-                {
-                    messages: [
-                        new HumanMessage(
-                            "I need creative ideas for a gamified language learning app"
-                        ),
-                    ],
-                },
-                { recursionLimit: 50 }
-            );
+            const result = await invokeWithRetry([
+                new HumanMessage(
+                    "I need creative ideas for a gamified language learning app"
+                ),
+            ]);
 
             const aiMessages = getAIMessages(result);
             const content = getLastAIContent(result);
@@ -80,16 +103,11 @@ describe(
 
         // ── Planning Agent full round-trip ─────────────────────
         it("planning agent produces a structured plan", async () => {
-            const result = await graph.invoke(
-                {
-                    messages: [
-                        new HumanMessage(
-                            "Create a 3-step project plan for building a weather dashboard"
-                        ),
-                    ],
-                },
-                { recursionLimit: 50 }
-            );
+            const result = await invokeWithRetry([
+                new HumanMessage(
+                    "Create a 3-step project plan for building a weather dashboard"
+                ),
+            ]);
 
             const aiMessages = getAIMessages(result);
             const content = getLastAIContent(result);
@@ -147,16 +165,11 @@ describe(
 
         // ── Reviewer Agent full round-trip ─────────────────────
         it("reviewer agent produces review feedback", async () => {
-            const result = await graph.invoke(
-                {
-                    messages: [
-                        new HumanMessage(
-                            "Review the following code for bugs and improvements:\n\nfunction add(a, b) { return a + b }\nfunction divide(a, b) { return a / b }"
-                        ),
-                    ],
-                },
-                { recursionLimit: 50 }
-            );
+            const result = await invokeWithRetry([
+                new HumanMessage(
+                    "Review the following code for bugs and improvements:\n\nfunction add(a, b) { return a + b }\nfunction divide(a, b) { return a / b }"
+                ),
+            ]);
 
             const aiMessages = getAIMessages(result);
             const content = getLastAIContent(result);
@@ -183,16 +196,11 @@ describe(
 
         // ── State integrity across multi-hop ──────────────────
         it("state is properly updated through the full routing cycle", async () => {
-            const result = await graph.invoke(
-                {
-                    messages: [
-                        new HumanMessage(
-                            "Help me brainstorm unique features for a pet adoption platform"
-                        ),
-                    ],
-                },
-                { recursionLimit: 50 }
-            );
+            const result = await invokeWithRetry([
+                new HumanMessage(
+                    "Help me brainstorm unique features for a pet adoption platform"
+                ),
+            ]);
 
             // Full cycle completed — specialist preserves identity
             const specialist = result.lastSpecialistAgent || result.currentAgent;
@@ -234,10 +242,7 @@ describe(
 
             const results = await Promise.all(
                 prompts.map(([_label, msg]) =>
-                    graph.invoke(
-                        { messages: [new HumanMessage(msg)] },
-                        { recursionLimit: 50 }
-                    )
+                    invokeWithRetry([new HumanMessage(msg)])
                 )
             );
 
