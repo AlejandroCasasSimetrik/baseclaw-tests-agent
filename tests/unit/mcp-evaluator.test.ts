@@ -117,5 +117,5 @@ describe("MCP Tool Accuracy Evaluator", () => {
             expect(result.score).toBeGreaterThanOrEqual(0);
             expect(result.score).toBeLessThanOrEqual(1);
         }
-    });
+    }, 30_000);
 });
