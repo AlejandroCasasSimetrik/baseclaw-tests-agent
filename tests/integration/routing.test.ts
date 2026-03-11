@@ -14,7 +14,7 @@ import { buildGraph } from "baseclaw-agent/src/graph.js";
  * resets currentAgent to "conversation" when a specialist handled it.
  */
 
-describe("End-to-End Routing", { timeout: 60_000 }, () => {
+describe("End-to-End Routing", { timeout: 120_000 }, () => {
     beforeAll(() => {
         if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === "sk-your-openai-api-key") {
             throw new Error("OPENAI_API_KEY is required. Set it in .env to run tests.");
@@ -131,7 +131,7 @@ describe("End-to-End Routing", { timeout: 60_000 }, () => {
     });
 });
 
-describe("Iteration Safety (live)", { timeout: 60_000 }, () => {
+describe("Iteration Safety (live)", { timeout: 120_000 }, () => {
     it("respects custom maxIterations", async () => {
         const graph = buildGraph();
 
@@ -148,7 +148,7 @@ describe("Iteration Safety (live)", { timeout: 60_000 }, () => {
     });
 });
 
-describe("Response Quality", { timeout: 60_000 }, () => {
+describe("Response Quality", { timeout: 120_000 }, () => {
     it("responses are non-empty strings", async () => {
         const graph = buildGraph();
 

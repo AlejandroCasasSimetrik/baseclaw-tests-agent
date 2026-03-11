@@ -16,7 +16,7 @@ import { buildGraph } from "baseclaw-agent/src/graph.js";
 
 describe(
     "Multi-Agent Traces (Level 4 — Observability)",
-    { timeout: 60_000 },
+    { timeout: 120_000 },
     () => {
         beforeAll(() => {
             if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === "sk-your-openai-api-key") {

@@ -75,7 +75,7 @@ describe("Agent Return Types", () => {
             const result = await agentFn(state);
             expect(result).toBeInstanceOf(Command);
         }
-    });
+    }, 30_000);
 });
 
 describe("Agent Isolation", () => {
