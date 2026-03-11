@@ -18,7 +18,7 @@ describe("Graph Assembly", () => {
     });
 
     describe("node structure (via Mermaid)", () => {
-        it("contains all 6 nodes (5 agents + reviewerGate)", () => {
+        it("contains all 5 agent nodes", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
 
@@ -27,22 +27,19 @@ describe("Graph Assembly", () => {
             expect(mermaid).toContain("planning");
             expect(mermaid).toContain("execution");
             expect(mermaid).toContain("reviewer");
-            expect(mermaid).toContain("reviewerGate");
         });
 
-        it("has exactly 6 nodes (no extras)", () => {
+        it("has exactly 5 nodes (no extras)", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
 
-            // Count lines that define nodes (contain parentheses — node definitions)
-            // Node lines look like: conversation(conversation)
             const nodeLines = mermaid
                 .split("\n")
                 .filter(
                     (line: string) =>
                         line.trim().match(/^\w+\(/) && !line.includes("__start__") && !line.includes("__end__")
                 );
-            expect(nodeLines).toHaveLength(6);
+            expect(nodeLines).toHaveLength(5);
         });
 
         it("has __start__ connecting to conversation", () => {
