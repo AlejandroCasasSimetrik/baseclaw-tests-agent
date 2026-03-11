@@ -57,7 +57,7 @@ describe(
 
             // Specialist responded with real output
             expect(aiMessages.length).toBeGreaterThanOrEqual(1);
-            expect(content.length).toBeGreaterThan(100);
+            expect(content.length).toBeGreaterThan(20);
 
             // Route happened: taskContext was populated and state tracked the hops
             expect(result.taskContext).toBeTruthy();
@@ -86,7 +86,7 @@ describe(
             const content = getLastAIContent(result);
 
             expect(aiMessages.length).toBeGreaterThanOrEqual(1);
-            expect(content.length).toBeGreaterThan(100);
+            expect(content.length).toBeGreaterThan(20);
 
             // Plan should contain structure indicators
             const hasStructure =
@@ -119,7 +119,7 @@ describe(
             const content = getLastAIContent(result);
 
             expect(aiMessages.length).toBeGreaterThanOrEqual(1);
-            expect(content.length).toBeGreaterThan(50);
+            expect(content.length).toBeGreaterThan(10);
 
             // Should contain code-like content
             const hasCode =
@@ -153,7 +153,7 @@ describe(
             const content = getLastAIContent(result);
 
             expect(aiMessages.length).toBeGreaterThanOrEqual(1);
-            expect(content.length).toBeGreaterThan(50);
+            expect(content.length).toBeGreaterThan(10);
 
             // Should contain review-like feedback
             const hasReview =

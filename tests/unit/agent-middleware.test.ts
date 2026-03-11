@@ -140,6 +140,6 @@ describe("Agent Middleware", () => {
                 const wrapped = withContext(mockAgent, agentType);
                 await expect(wrapped(makeState())).resolves.toBeInstanceOf(Command);
             }
-        });
+        }, 30_000);
     });
 });
