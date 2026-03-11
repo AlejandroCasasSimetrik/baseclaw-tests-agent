@@ -11,7 +11,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "baseclaw-agent": "workspace:*"
+    "baseclaw-agent": "*"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
