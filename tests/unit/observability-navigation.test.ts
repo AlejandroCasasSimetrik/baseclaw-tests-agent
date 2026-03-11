@@ -50,14 +50,14 @@ describe("Bidirectional Navigation (Level 4)", () => {
 
     it("getEpisodesForTrace is a callable function", async () => {
         const { getEpisodesForTrace } = await import(
-            "../../src/observability/navigation.js"
+            "baseclaw-agent/src/observability/navigation.js"
         );
         expect(typeof getEpisodesForTrace).toBe("function");
     });
 
     it("getEpisodesForTrace throws for empty traceId", async () => {
         const { getEpisodesForTrace } = await import(
-            "../../src/observability/navigation.js"
+            "baseclaw-agent/src/observability/navigation.js"
         );
         await expect(getEpisodesForTrace("")).rejects.toThrow("traceId is required");
     });
@@ -66,7 +66,7 @@ describe("Bidirectional Navigation (Level 4)", () => {
 
     it("getTraceUrlForEpisode is a callable function", async () => {
         const { getTraceUrlForEpisode } = await import(
-            "../../src/observability/navigation.js"
+            "baseclaw-agent/src/observability/navigation.js"
         );
         expect(typeof getTraceUrlForEpisode).toBe("function");
     });

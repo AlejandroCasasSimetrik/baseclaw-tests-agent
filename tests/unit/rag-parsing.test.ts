@@ -122,7 +122,7 @@ describe("Level 5 — RAG Parsing", () => {
     });
 
     describe("code parser", async () => {
-        const { parseCodeFile } = await import("../../src/rag/parsers/code-parser.js");
+        const { parseCodeFile } = await import("baseclaw-agent/src/rag/parsers/code-parser.js");
 
         it("extracts text from code buffer", async () => {
             const code = "const x = 42;\nconsole.log(x);";
@@ -144,7 +144,7 @@ describe("Level 5 — RAG Parsing", () => {
     });
 
     describe("media parsers", async () => {
-        const { parseImage, parseAudio, parseVideo } = await import("../../src/rag/parsers/media-parser.js");
+        const { parseImage, parseAudio, parseVideo } = await import("baseclaw-agent/src/rag/parsers/media-parser.js");
 
         it("returns OCR stub for images", async () => {
             const result = await parseImage("photo.png", Buffer.from(""), "png");
@@ -166,7 +166,7 @@ describe("Level 5 — RAG Parsing", () => {
     });
 
     describe("web parser", async () => {
-        const { parseWebFile } = await import("../../src/rag/parsers/index.js");
+        const { parseWebFile } = await import("baseclaw-agent/src/rag/parsers/index.js");
 
         it("extracts text from web files", async () => {
             const html = "<html><body>Hello World</body></html>";

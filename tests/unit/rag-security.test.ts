@@ -104,26 +104,26 @@ function calculateTotal(items) {
 
     describe("file type validation security", () => {
         it("rejects executable files", async () => {
-            const { validateFile } = await import("../../src/rag/validation.js");
+            const { validateFile } = await import("baseclaw-agent/src/rag/validation.js");
             const result = await validateFile("virus.exe", 100, Buffer.from(""));
             expect(result.valid).toBe(false);
             expect(result.reason).toContain("not supported");
         });
 
         it("rejects DLL files", async () => {
-            const { validateFile } = await import("../../src/rag/validation.js");
+            const { validateFile } = await import("baseclaw-agent/src/rag/validation.js");
             const result = await validateFile("lib.dll", 100, Buffer.from(""));
             expect(result.valid).toBe(false);
         });
 
         it("rejects batch scripts", async () => {
-            const { validateFile } = await import("../../src/rag/validation.js");
+            const { validateFile } = await import("baseclaw-agent/src/rag/validation.js");
             const result = await validateFile("script.bat", 100, Buffer.from(""));
             expect(result.valid).toBe(false);
         });
 
         it("rejects files with no extension", async () => {
-            const { validateFile } = await import("../../src/rag/validation.js");
+            const { validateFile } = await import("baseclaw-agent/src/rag/validation.js");
             const result = await validateFile("Makefile", 100, Buffer.from(""));
             expect(result.valid).toBe(false);
         });

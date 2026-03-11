@@ -34,7 +34,7 @@ describe("Semantic Memory", () => {
     describe("upsertToKnowledge() access control", () => {
         it("throws for unknown agent types not in KNOWLEDGE_WRITERS", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge(
@@ -59,7 +59,7 @@ describe("Semantic Memory", () => {
 
         it("throws for empty string agent type", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge([], "")
@@ -68,7 +68,7 @@ describe("Semantic Memory", () => {
 
         it("rejects random unregistered agent names", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             const invalidAgents = ["admin", "root", "system", "external", "test"];
             for (const agent of invalidAgents) {
@@ -80,7 +80,7 @@ describe("Semantic Memory", () => {
 
         it("allows reviewer agent (in KNOWLEDGE_WRITERS)", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             // Should NOT throw Access denied — it will fail on Pinecone API call instead
             // because we're using a fake API key, but the access control check passes
@@ -91,7 +91,7 @@ describe("Semantic Memory", () => {
 
         it("allows conversation agent (in KNOWLEDGE_WRITERS)", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge([], "conversation")
@@ -100,7 +100,7 @@ describe("Semantic Memory", () => {
 
         it("allows ideation agent (in KNOWLEDGE_WRITERS)", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge([], "ideation")
@@ -109,7 +109,7 @@ describe("Semantic Memory", () => {
 
         it("allows execution agent (in KNOWLEDGE_WRITERS)", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge([], "execution")
@@ -118,7 +118,7 @@ describe("Semantic Memory", () => {
 
         it("allows planning agent (in KNOWLEDGE_WRITERS)", async () => {
             const { upsertToKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             await expect(
                 upsertToKnowledge([], "planning")
@@ -143,21 +143,21 @@ describe("Semantic Memory", () => {
     describe("namespace functions", () => {
         it("getNamespace is a function", async () => {
             const { getNamespace } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             expect(typeof getNamespace).toBe("function");
         });
 
         it("querySemanticMemory is a function", async () => {
             const { querySemanticMemory } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             expect(typeof querySemanticMemory).toBe("function");
         });
 
         it("deleteFromKnowledge is a function", async () => {
             const { deleteFromKnowledge } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             expect(typeof deleteFromKnowledge).toBe("function");
         });
@@ -168,7 +168,7 @@ describe("Semantic Memory", () => {
     describe("generateEmbedding()", () => {
         it("generateEmbedding is a function", async () => {
             const { generateEmbedding } = await import(
-                "../../src/memory/semantic/pinecone.js"
+                "baseclaw-agent/src/memory/semantic/pinecone.js"
             );
             expect(typeof generateEmbedding).toBe("function");
         });

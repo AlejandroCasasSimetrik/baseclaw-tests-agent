@@ -63,7 +63,7 @@ describe("Level 5 — RAG Retrieval Quality Evaluator", { timeout: 30_000 }, () 
     });
 
     it("is registered in EVALUATOR_TEMPLATES", async () => {
-        const { EVALUATOR_TEMPLATES } = await import("../../src/observability/evaluators.js");
+        const { EVALUATOR_TEMPLATES } = await import("baseclaw-agent/src/observability/evaluators.js");
         expect(EVALUATOR_TEMPLATES).toHaveProperty("rag_retrieval_quality");
         expect(typeof EVALUATOR_TEMPLATES.rag_retrieval_quality).toBe("function");
     });

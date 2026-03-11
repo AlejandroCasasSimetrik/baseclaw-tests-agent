@@ -60,28 +60,28 @@ describe("Trace Metadata (Level 4)", () => {
 
     it("traceSkillScoring is a callable function", async () => {
         const { traceSkillScoring } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceSkillScoring).toBe("function");
     });
 
     it("traceMemoryRead is a callable function", async () => {
         const { traceMemoryRead } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceMemoryRead).toBe("function");
     });
 
     it("traceMemoryWrite is a callable function", async () => {
         const { traceMemoryWrite } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceMemoryWrite).toBe("function");
     });
 
     it("traceInterAgentMessage is a callable function", async () => {
         const { traceInterAgentMessage } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceInterAgentMessage).toBe("function");
     });
@@ -90,21 +90,21 @@ describe("Trace Metadata (Level 4)", () => {
 
     it("traceHeartbeat is a callable function", async () => {
         const { traceHeartbeat } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceHeartbeat).toBe("function");
     });
 
     it("traceHITLTrigger is a callable function", async () => {
         const { traceHITLTrigger } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceHITLTrigger).toBe("function");
     });
 
     it("traceHITLResume is a callable function", async () => {
         const { traceHITLResume } = await import(
-            "../../src/observability/trace-metadata.js"
+            "baseclaw-agent/src/observability/trace-metadata.js"
         );
         expect(typeof traceHITLResume).toBe("function");
     });

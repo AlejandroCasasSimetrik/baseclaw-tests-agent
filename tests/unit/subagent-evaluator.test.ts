@@ -101,7 +101,7 @@ describe("Level 8 — Sub-agent Efficiency Evaluator", () => {
 
     it("is included in EVALUATOR_TEMPLATES", async () => {
         const { EVALUATOR_TEMPLATES } = await import(
-            "../../src/observability/evaluators.js"
+            "baseclaw-agent/src/observability/evaluators.js"
         );
 
         expect(EVALUATOR_TEMPLATES).toHaveProperty("sub_agent_efficiency");
