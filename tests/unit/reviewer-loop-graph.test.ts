@@ -16,7 +16,7 @@ describe("Level 10 — Graph Integration", () => {
     });
 
     describe("node structure", () => {
-        it("contains all 6 nodes (5 agents + reviewerGate)", () => {
+        it("contains all 5 agent nodes", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
 
@@ -25,15 +25,13 @@ describe("Level 10 — Graph Integration", () => {
             expect(mermaid).toContain("planning");
             expect(mermaid).toContain("execution");
             expect(mermaid).toContain("reviewer");
-            expect(mermaid).toContain("reviewerGate");
         });
 
-        it("has exactly 6 agent/gate nodes (no extras)", () => {
+        it("has exactly 5 agent nodes (no extras)", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
 
-            // With Command-based routing, Mermaid shows nodes even without
-            // static edges. Count node definition lines.
+            // Count node definition lines (word(word) pattern)
             const nodeLines = mermaid
                 .split("\n")
                 .filter(
@@ -42,7 +40,7 @@ describe("Level 10 — Graph Integration", () => {
                         !line.includes("__start__") &&
                         !line.includes("__end__")
                 );
-            expect(nodeLines).toHaveLength(6);
+            expect(nodeLines).toHaveLength(5);
         });
 
         it("has __start__ connecting to conversation", () => {
@@ -61,30 +59,29 @@ describe("Level 10 — Graph Integration", () => {
         });
     });
 
-    describe("reviewerGate node presence", () => {
-        it("reviewerGate node is defined in the graph", () => {
-            const graph = buildGraph();
-            const mermaid = graph.getGraph().drawMermaid();
-            // reviewerGate node definition line
-            expect(mermaid).toMatch(/reviewerGate\(reviewerGate\)/);
-        });
-
-        it("ideation node is defined (can route to reviewerGate via Command)", () => {
+    describe("agent node presence", () => {
+        it("ideation node is defined", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
             expect(mermaid).toMatch(/ideation\(ideation\)/);
         });
 
-        it("planning node is defined (can route to reviewerGate via Command)", () => {
+        it("planning node is defined", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
             expect(mermaid).toMatch(/planning\(planning\)/);
         });
 
-        it("execution node is defined (can route to reviewerGate via Command)", () => {
+        it("execution node is defined", () => {
             const graph = buildGraph();
             const mermaid = graph.getGraph().drawMermaid();
             expect(mermaid).toMatch(/execution\(execution\)/);
+        });
+
+        it("reviewer node is defined", () => {
+            const graph = buildGraph();
+            const mermaid = graph.getGraph().drawMermaid();
+            expect(mermaid).toMatch(/reviewer\(reviewer\)/);
         });
     });
 
