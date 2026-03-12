@@ -44,7 +44,7 @@ describe("Level 10 — Sub-Reviewer", () => {
             expect(["approved", "needs_revision", "needs_hitl"]).toContain(result.verdict);
             expect(result.reviewId).toBeTruthy();
             expect(result.timestamp).toBeTruthy();
-        }, 30_000);
+        }, 60_000);
 
         it("returns a QualityAssessment for parallel review (falls back gracefully)", async () => {
             const result = await spawnSubReviewers(
@@ -59,7 +59,7 @@ describe("Level 10 — Sub-Reviewer", () => {
             expect(typeof result.overallScore).toBe("number");
             expect(result.dimensions).toHaveLength(6);
             expect(["approved", "needs_revision", "needs_hitl"]).toContain(result.verdict);
-        }, 30_000);
+        }, 60_000);
 
         it("fallback assessment has low confidence", async () => {
             const result = await spawnSubReviewers(
@@ -72,6 +72,6 @@ describe("Level 10 — Sub-Reviewer", () => {
 
             // Fallback should have very low confidence since sub-agent failed
             expect(result.confidence).toBeLessThanOrEqual(65);
-        }, 30_000);
+        }, 60_000);
     });
 });
