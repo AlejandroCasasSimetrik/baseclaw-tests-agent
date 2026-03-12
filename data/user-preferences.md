@@ -64,3 +64,13 @@ Automatically extracted from conversations. Safe to edit manually.
 ### 3/12/2026, 8:27:31 AM
 - User has an idea for an AI-powered gardening assistant that they want to explore, develop, or discuss further.
 
+### 3/12/2026, 8:34:32 AM
+- User wants to explore, develop, and brainstorm around the gardening assistant idea
+
+### 3/12/2026, 8:35:40 AM
+- User is planning to build a mobile app and needs a comprehensive development strategy
+- User requires structured phases including discovery, planning, design, prototyping, development, testing, and launch
+- User wants detailed task breakdowns with timelines and dependencies for each phase
+- User needs documentation of project scope, market research, technical architecture, and roadmap planning
+- User is interested in UX/UI design, prototyping, and user testing as part of the development process
+
